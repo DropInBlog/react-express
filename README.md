@@ -24,7 +24,7 @@ Set your credentials in the environment (recommended):
 
 ```bash
 DROPINBLOG_BLOG_ID=your_dropinblog_blog_id
-DROPINBLOG_API_TOKEN=your_dropinblog_api_token
+DROPINBLOG_API_KEY=your_dropinblog_api_key
 ```
 
 ## Basic Usage
@@ -125,7 +125,7 @@ Creates an Express middleware function for rendering DropInBlog content.
 
 - `basePath` (string, optional): Base path for blog routes. Default: `/blog`
 - `blogId` (string, optional): Your DropInBlog blog ID. Defaults to `DROPINBLOG_BLOG_ID` env var
-- `apiToken` (string, optional): Your DropInBlog API token. Defaults to `DROPINBLOG_API_TOKEN` env var
+- `apiKey` (string, optional): Your DropInBlog API key. Defaults to `DROPINBLOG_API_KEY` env var
 - `cacheTtlMs` (number, optional): Cache TTL in milliseconds. Default: `300000` (5 minutes)
 - `renderHtml` (function, optional): Custom HTML rendering function
 - `onError` (function, optional): Custom error handler
