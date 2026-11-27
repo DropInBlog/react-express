@@ -102,7 +102,7 @@ app.use('/blog', createDropInBlogExpressMiddleware({
 
 ### Custom 404 Handler
 
-Provide a custom handler for non-matching routes:
+Provide a custom handler for non-matching routes and for posts, categories or authors that don't exist. Without one, those requests fall through to `next()`, so your app's own 404 handling applies:
 
 ```typescript
 app.use('/blog', createDropInBlogExpressMiddleware({
@@ -129,7 +129,7 @@ Creates an Express middleware function for rendering DropInBlog content.
 - `cacheTtlMs` (number, optional): Cache TTL in milliseconds. Default: `300000` (5 minutes)
 - `renderHtml` (function, optional): Custom HTML rendering function
 - `onError` (function, optional): Custom error handler
-- `notFoundHandler` (RequestHandler, optional): Custom 404 handler
+- `notFoundHandler` (RequestHandler, optional): Custom 404 handler, also used when the API returns 404 (defaults to `next()`)
 
 ### Utility Functions
 

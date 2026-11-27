@@ -143,6 +143,16 @@ export function createDropInBlogExpressMiddleware(
       res.setHeader('Content-Type', 'text/html');
       res.send(html);
     } catch (error) {
+      // The core client throws `DropInBlog request failed (404): ...` for a missing
+      // post, category or author (or a draft without a valid preview token); treat
+      // it like an unmatched path instead of a server error
+      if (error instanceof Error && /\(404\)/.test(error.message)) {
+        if (notFoundHandler) {
+          return notFoundHandler(req, res, next);
+        }
+        return next();
+      }
+
       if (onError) {
         return onError(error as Error, req, res);
       }
