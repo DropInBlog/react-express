@@ -107,8 +107,12 @@ export function createDropInBlogExpressMiddleware(
         return next();
       }
 
-      const resolution = await router.resolve(pathname);
-      const { payload } = resolution;
+      // ?preview carries the token from the admin's Preview Post link for a draft or scheduled post
+      const preview = typeof req.query.preview === 'string' ? req.query.preview : undefined;
+      const payload =
+        preview && match.kind === 'post' && match.params?.slug
+          ? await client.fetchPost(match.params.slug, { preview })
+          : (await router.resolve(pathname)).payload;
 
       const content = payload.body_html ?? '';
       const headDescriptors = buildHeadDescriptors(
